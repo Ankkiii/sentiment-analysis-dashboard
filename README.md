@@ -73,20 +73,3 @@ _A screenshot of the Sentiment Analysis Dashboard in action, displaying sentimen
 ├── test_sentiment.py      # Unit tests for the sentiment analysis functions in sentiment.py.
 └── requirements.txt       # Lists all Python dependencies required for the project.
 
-## Interview Q&A
-
-### Q1: You chose a lexicon-based model over a machine learning model for sentiment analysis. What were the key reasons behind this decision, and what are its main advantages and limitations in this context?
-
-**A1:** The primary reasons for selecting a lexicon-based model were simplicity, computational efficiency, and minimizing heavyweight dependencies, which aligns with the project's goal of a lightweight dashboard. Lexicon models are quick to implement, require no training data, and are very performant for basic positive/negative/neutral sentiment classification, making them ideal for immediate results and ease of deployment. The main advantage is speed and resource efficiency. However, a key limitation is precision; these models often struggle with nuances like sarcasm, double negatives, idiomatic expressions, and context-specific sentiment that a sophisticated, trained ML model could capture. For this project, the aim was to demonstrate the core concept of sentiment analysis effectively without the overhead of complex model training and management.
-
-### Q2: How does this dashboard handle new or different datasets of reviews? Are there any data formatting requirements users should be aware of when uploading their own CSV files?
-
-**A2:** The dashboard is designed to be flexible for various review datasets. It expects a CSV file where one of the columns contains the review text. By default, it will attempt to identify a column named `review` or `text`, but the `app.py` logic can be easily extended or modified to allow users to select the correct text column from a dropdown after upload. Users should ensure their CSV is well-formed and that the column containing the review text is clearly identifiable. While the current implementation includes basic error handling for file uploads, more robust validation could be added to guide users on expected formats or missing columns, thereby improving user experience.
-
-### Q3: Given that this project avoids "heavyweight deps," how would you approach scaling this sentiment analysis solution for a much larger volume of data (e.g., millions of reviews per day) or for more nuanced sentiment detection in a production environment?
-
-**A3:** For significantly larger data volumes or a production setting requiring more nuanced sentiment detection, the "no heavyweight deps" constraint would need to be relaxed. First, I would separate the data processing and sentiment analysis logic into a robust backend service. For large volumes, I'd integrate distributed processing frameworks like Apache Spark or Dask to handle data ingestion, parallel processing, and sentiment scoring efficiently. For enhanced accuracy and nuance, I would replace the lexicon model with a pre-trained transformer-based model (e.g., BERT, RoBERTa) from libraries like Hugging Face Transformers, potentially fine-tuning it on domain-specific data if available. The Streamlit dashboard would then serve as a responsive front-end, interacting with this powerful, scalable backend via an API, ensuring that the user interface remains fast and interactive while the heavy computational lifting occurs elsewhere.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
